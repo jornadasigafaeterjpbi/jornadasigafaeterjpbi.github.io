@@ -16,37 +16,49 @@
           <div class="card-body">
             <h4>Pesquisar</h4>
             <div class="input-group mb-3">
-              <input type="email" class="form-control" placeholder="E-mail de inscrição"
+              <input [(ngModel)]="aluno_email" type="text" class="form-control" placeholder="E-mail de inscrição"
                 aria-label="E-mail de inscrição" aria-describedby="basic-addon2">
               <div class="input-group-append">
-                <button (click)="getCerts()" class="btn btn-secondary" type="button"><i class="fa fa-search"></i> Pesquisar
+                <button (click)="getCerts()" class="btn btn-secondary" type="button"><i class="fa fa-search"></i>
+                  Pesquisar
                   Certificados</button>
               </div>
+            </div>
+            <div class="alert alert-info" *ngIf="processando">
+              <i class="fa fa-spinner fa-spin"></i> Processando sua solicitação...
             </div>
             <div class="alert alert-warning" role="alert">
               <h4 class="alert-heading"><i class="fa fa-exclamation-triangle"></i> Importante!</h4>
               <p>Insira o e-mail que foi usado para realizar a inscrição no evento.</p>
               <hr>
-              <p class="mb-0">Se você não encontrou o(s) seu(s) certificado(s), muito provavelmente o seu nome ou e-mail estavam ilegíveis na lista de presença. Se você efetuou o pagamento e assinou a lista de presença mas não encontrou nenhum certificado, entre em contato conosco!</p>
+              <p class="mb-0">Se você não encontrou o(s) seu(s) certificado(s), muito provavelmente o seu nome ou e-mail
+                estavam ilegíveis na lista de presença. Se você efetuou o pagamento e assinou a lista de presença mas
+                não encontrou nenhum certificado, entre em contato conosco!</p>
             </div>
           </div>
         </div>
         <br>
         <br>
-        <table class="table table-hover" ng-bind="certs" *ngIf="certs">
-          <thead>
-            <th>Título</th>
-            <th>Carga Horária</th>
-            <th style="width: 30%;">&nbsp;</th>
-          </thead>
-          <tbody>
-            <tr  *ngFor="let cert of certs">
-              <td style="vertical-align:middle;">{{cert.name}}</td>
-              <td style="vertical-align:middle;">{{cert.username}}</td>
-              <td style="text-align: right; "><a href="{{cert.email}}" class="btn btn-success"><i class="fa fa-download"></i> &nbsp;Download</a></td>
-            </tr>
-          </tbody>
-        </table>
+        <div *ngIf="certs">
+          <h4>Certificados Encontrados</h4>
+          <table class="table table-hover" ng-bind="certs">
+            <thead>
+              <th>Aluno</th>
+              <th>Evento</th>
+              <th>Carga Horária</th>
+              <th style="width: 30%;">&nbsp;</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cert of certs">
+                <td style="vertical-align:middle;">{{cert.aluno.nome}}</td>
+                <td style="vertical-align:middle;">{{cert.palestra.titulo}}</td>
+                <td style="vertical-align:middle;">{{cert.palestra.carga_horaria}} Hora(s)</td>
+                <td style="text-align: right; "><a target="_blank" href="{{cert.source}}" class="btn btn-success"><i
+                      class="fa fa-download"></i> &nbsp;Download</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
