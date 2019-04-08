@@ -42,19 +42,16 @@
         <div *ngIf="certs">
           <h4>Certificados Encontrados</h4>
           <table class="table table-hover" ng-bind="certs">
-            <thead>
-              <th>Aluno</th>
+            <thead>              
               <th>Evento</th>
               <th>Carga Horária</th>
               <th style="width: 30%;">&nbsp;</th>
             </thead>
             <tbody>
-              <tr *ngFor="let cert of certs">
-                <td style="vertical-align:middle;">{{cert.aluno.nome}}</td>
+              <tr *ngFor="let cert of certs">                
                 <td style="vertical-align:middle;">{{cert.palestra.titulo}}</td>
                 <td style="vertical-align:middle;">{{cert.palestra.carga_horaria}} Hora(s)</td>
-                <td style="text-align: right; "><a target="_blank" href="{{cert.source}}" class="btn btn-success"><i
-                      class="fa fa-download"></i> &nbsp;Download</a></td>
+                <td style="text-align: right; vertical-align:middle;"><a target="_blank" href="https://jornadasiga.herokuapp.com/downloads/certificado/{{cert.id}}" class="btn btn-success"><i class="fa fa-download"></i> &nbsp;Download</a></td>
               </tr>
             </tbody>
           </table>
